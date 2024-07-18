@@ -2,33 +2,37 @@ package com.workintech.ecommerce_backend.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
 import jakarta.persistence.*;
 import java.time.Instant;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "payments",schema = "fsweb")
+@Table(name = "payments", schema = "fsweb")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
+    @Column(nullable = false, length = 45,name="method")
     private String method;
 
-    @Column(nullable = false, updatable = false, insertable = false)
-    private Instant date;
+    @Column(nullable = false,name="date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Instant date = Instant.now();
 
+    @Column(nullable = false,name="amount")
     private Double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", unique = true, nullable = false)
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
     private Order order;
 
     @ManyToOne
     @JoinColumn(name = "credit_card_id")
     private CreditCard creditCard;
+
 }
 

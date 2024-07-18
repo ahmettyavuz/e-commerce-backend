@@ -1,25 +1,26 @@
 package com.workintech.ecommerce_backend.entity;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
 import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "reviews",schema = "fsweb")
+@Table(name = "reviews", schema = "fsweb")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
+    @Column(nullable = false)
     private String message;
 
-    @ManyToOne
+    @ManyToOne(cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)

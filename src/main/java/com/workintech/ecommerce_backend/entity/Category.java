@@ -1,21 +1,29 @@
 package com.workintech.ecommerce_backend.entity;
-
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "categories",schema = "fsweb")
+@Table(name = "categories", schema = "fsweb")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
-    private String name;
+    @Column(nullable = false, length = 45,name="name")
+    @Enumerated(EnumType.STRING)
+    private Enum_Category name;
+
+    @Column(nullable = false,name="description")
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
+    private List<Product> products ;
 }
 

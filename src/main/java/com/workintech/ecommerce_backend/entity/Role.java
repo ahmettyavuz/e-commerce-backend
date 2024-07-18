@@ -1,19 +1,25 @@
 package com.workintech.ecommerce_backend.entity;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "rols",schema = "fsweb")
+@Table(name = "roles", schema = "fsweb")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
-    private String role;
+    @Column(nullable = false, length = 45,name="role")
+    @Enumerated(EnumType.STRING)
+    private Enum_Role role;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
+    private List<User> users ;
 }
