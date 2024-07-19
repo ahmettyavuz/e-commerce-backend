@@ -1,9 +1,8 @@
-package com.workintech.ecommerce_backend.service;
+package com.workintech.ecommerce.service;
 
 
-import com.workintech.ecommerce_backend.entity.Address;
+import com.workintech.ecommerce.entity.Address;
 
-
-public interface AddressService extends Service<Address> {
+public interface AddressService extends Service<Address>{
 
 }

@@ -1,7 +1,7 @@
-package com.workintech.ecommerce_backend.service;
+package com.workintech.ecommerce.service;
 
-import com.workintech.ecommerce_backend.entity.Review;
-import com.workintech.ecommerce_backend.repository.ReviewRepository;
+import com.workintech.ecommerce.entity.Review;
+import com.workintech.ecommerce.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,13 +30,11 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.findById(id).orElseThrow(null) ;
     }
 
-    @Transactional
     @Override
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
 
-    @Transactional
     @Override
     public Review delete(Long id) {
         Review review = findById(id);

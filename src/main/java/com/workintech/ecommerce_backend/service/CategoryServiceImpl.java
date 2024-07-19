@@ -1,8 +1,8 @@
-package com.workintech.ecommerce_backend.service;
+package com.workintech.ecommerce.service;
 
-import com.workintech.ecommerce_backend.entity.Category;
+import com.workintech.ecommerce.entity.Category;
 
-import com.workintech.ecommerce_backend.repository.CategoryRepository;
+import com.workintech.ecommerce.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,17 +30,20 @@ public class CategoryServiceImpl implements  CategoryService{
         return categoryRepository.findById(id).orElseThrow(null) ;
     }
 
-    @Transactional
     @Override
     public Category save(Category category) {
         return categoryRepository.save(category);
     }
 
-    @Transactional
     @Override
     public Category delete(Long id) {
         Category category = findById(id);
         categoryRepository.delete(category);
         return category;
+    }
+
+    @Override
+    public Category getByName(String name) {
+        return categoryRepository.getByName(name);
     }
 }

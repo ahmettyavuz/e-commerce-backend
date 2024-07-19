@@ -1,6 +1,6 @@
-package com.workintech.ecommerce_backend.service;
+package com.workintech.ecommerce.service;
 
-import com.workintech.ecommerce_backend.entity.Payment;
+import com.workintech.ecommerce.entity.Payment;
 
 public interface PaymentService extends Service<Payment>{
 }

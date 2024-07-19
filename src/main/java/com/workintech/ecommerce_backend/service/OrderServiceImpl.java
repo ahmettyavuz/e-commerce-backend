@@ -1,8 +1,10 @@
-package com.workintech.ecommerce_backend.service;
+package com.workintech.ecommerce.service;
 
-import com.workintech.ecommerce_backend.entity.Order;
-import com.workintech.ecommerce_backend.repository.OrderRepository;
-import jakarta.transaction.Transactional;
+import com.workintech.ecommerce.dto.OrderRequestDto;
+import com.workintech.ecommerce.entity.Order;
+import com.workintech.ecommerce.entity.User;
+import com.workintech.ecommerce.mapper.OrderMapper;
+import com.workintech.ecommerce.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,13 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final UserService userService;
+
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, UserService userService) {
         this.orderRepository = orderRepository;
+        this.userService = userService;
     }
 
 
@@ -27,27 +32,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Long id) {
-        /*
-        Optional<Address> address = addressRepository.findById(id);
-        if(address.isPresent()){
-            return address.get();
-        }
-        */
         return orderRepository.findById(id).orElseThrow(null) ;
     }
 
-    @Transactional
     @Override
     public Order save(Order order) {
         return orderRepository.save(order);
     }
 
-    // buna koymaya gerek var mı sonuçta dml
-    @Transactional
     @Override
     public Order delete(Long id) {
         Order order = findById(id);
         orderRepository.delete(order);
+        return order;
+    }
+
+    @Override
+    public Order createOrder(OrderRequestDto orderRequestDto) {
+        User user = userService.findByEmail(orderRequestDto.userRequestDto().email());
+        Order order = OrderMapper.orderRequestDtoToOrder(orderRequestDto);
+        order.setUser(user);
         return order;
     }
 }
