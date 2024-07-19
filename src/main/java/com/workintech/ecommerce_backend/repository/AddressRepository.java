@@ -1,6 +1,6 @@
-package com.workintech.ecommerce_backend.repository;
+package com.workintech.ecommerce.repository;
 
-import com.workintech.ecommerce_backend.entity.Address;
+import com.workintech.ecommerce.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AddressRepository extends JpaRepository<Address,Long> {

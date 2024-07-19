@@ -1,6 +1,6 @@
-package com.workintech.ecommerce_backend.repository;
+package com.workintech.ecommerce.repository;
 
-import com.workintech.ecommerce_backend.entity.Payment;
+import com.workintech.ecommerce.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentRepository extends JpaRepository<Payment,Long> {

@@ -1,7 +1,7 @@
-package com.workintech.ecommerce_backend.repository;
+package com.workintech.ecommerce.repository;
 
 
-import com.workintech.ecommerce_backend.entity.Review;
+import com.workintech.ecommerce.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReviewRepository extends JpaRepository<Review,Long> {
