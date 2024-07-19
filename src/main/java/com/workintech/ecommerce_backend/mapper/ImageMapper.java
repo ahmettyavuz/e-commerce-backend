@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.ImageRequestDto;
-import com.workintech.ecommerce.dto.ImageResponseDto;
-import com.workintech.ecommerce.entity.Image;
+import com.workintech.ecommerce_backend.dto.ImageRequestDto;
+import com.workintech.ecommerce_backend.dto.ImageResponseDto;
+import com.workintech.ecommerce_backend.entity.Image;
 
 public class ImageMapper {
 

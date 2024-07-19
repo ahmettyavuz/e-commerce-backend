@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.ProductRequestDto;
-import com.workintech.ecommerce.dto.ProductResponseDto;
-import com.workintech.ecommerce.entity.Product;
+import com.workintech.ecommerce_backend.dto.ProductRequestDto;
+import com.workintech.ecommerce_backend.dto.ProductResponseDto;
+import com.workintech.ecommerce_backend.entity.Product;
 
 import java.util.stream.Collectors;
 

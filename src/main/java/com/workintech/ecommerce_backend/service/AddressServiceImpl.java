@@ -1,7 +1,7 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
-import com.workintech.ecommerce.entity.Address;
-import com.workintech.ecommerce.repository.AddressRepository;
+import com.workintech.ecommerce_backend.entity.Address;
+import com.workintech.ecommerce_backend.repository.AddressRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

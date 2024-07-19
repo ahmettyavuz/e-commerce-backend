@@ -1,4 +1,4 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
 import java.util.List;
 

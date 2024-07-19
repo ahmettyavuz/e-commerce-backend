@@ -1,4 +1,5 @@
 package com.workintech.ecommerce_backend.entity;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,7 +33,7 @@ public class Address {
     private String city;
 
     @Column(nullable = false,name= "postal_code")
-    private Integer postalCode;
+    private String postalCode;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
             fetch=FetchType.LAZY)

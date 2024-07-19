@@ -1,8 +1,10 @@
 package com.workintech.ecommerce_backend.entity;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles", schema = "fsweb")
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -22,4 +24,9 @@ public class Role {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
     private List<User> users ;
+
+    @Override
+    public String getAuthority() {
+        return role.toString();
+    }
 }

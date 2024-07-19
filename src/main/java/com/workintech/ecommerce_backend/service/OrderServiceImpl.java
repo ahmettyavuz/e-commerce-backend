@@ -1,10 +1,10 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
-import com.workintech.ecommerce.dto.OrderRequestDto;
-import com.workintech.ecommerce.entity.Order;
-import com.workintech.ecommerce.entity.User;
-import com.workintech.ecommerce.mapper.OrderMapper;
-import com.workintech.ecommerce.repository.OrderRepository;
+import com.workintech.ecommerce_backend.dto.OrderRequestDto;
+import com.workintech.ecommerce_backend.entity.Order;
+import com.workintech.ecommerce_backend.entity.User;
+import com.workintech.ecommerce_backend.mapper.OrderMapper;
+import com.workintech.ecommerce_backend.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

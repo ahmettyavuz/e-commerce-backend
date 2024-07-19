@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.CreditCardRequestDto;
-import com.workintech.ecommerce.dto.CreditCardResponseDto;
-import com.workintech.ecommerce.entity.CreditCard;
+import com.workintech.ecommerce_backend.dto.CreditCardRequestDto;
+import com.workintech.ecommerce_backend.dto.CreditCardResponseDto;
+import com.workintech.ecommerce_backend.entity.CreditCard;
 
 public class CreditCardMapper {
 

@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.CategoryRequestDto;
-import com.workintech.ecommerce.dto.CategoryResponseDto;
-import com.workintech.ecommerce.entity.Category;
+import com.workintech.ecommerce_backend.dto.CategoryRequestDto;
+import com.workintech.ecommerce_backend.dto.CategoryResponseDto;
+import com.workintech.ecommerce_backend.entity.Category;
 
 public class CategoryMapper {
     public static Category categoryRequestDtoToCategory(CategoryRequestDto categoryRequestDto){

@@ -1,5 +1,6 @@
 package com.workintech.ecommerce_backend.entity;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,13 @@ public class Payment {
     @Column(name="id")
     private Long id;
 
-    @Column(nullable = false, length = 45,name="method")
-    private String method;
+    @Column(nullable = false, length = 20,name="method")
+    @Enumerated(EnumType.STRING)
+    private Enum_PaymentMethod method;
+
+    @Column(nullable = false, length = 20,name="status")
+    @Enumerated(EnumType.STRING)
+    private Enum_PaymentStatus status;
 
     @Column(nullable = false,name="date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,4 +41,3 @@ public class Payment {
     private CreditCard creditCard;
 
 }
-

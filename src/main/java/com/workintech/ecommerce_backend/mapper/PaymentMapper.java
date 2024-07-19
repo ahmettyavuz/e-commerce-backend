@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.PaymentRequestDto;
-import com.workintech.ecommerce.dto.PaymentResponseDto;
-import com.workintech.ecommerce.entity.Payment;
+import com.workintech.ecommerce_backend.dto.PaymentRequestDto;
+import com.workintech.ecommerce_backend.dto.PaymentResponseDto;
+import com.workintech.ecommerce_backend.entity.Payment;
 
 public class PaymentMapper {
 

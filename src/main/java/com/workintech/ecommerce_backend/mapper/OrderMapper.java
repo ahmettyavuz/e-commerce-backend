@@ -1,10 +1,10 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.OrderRequestDto;
-import com.workintech.ecommerce.dto.OrderResponseDto;
-import com.workintech.ecommerce.dto.UserResponseDto;
-import com.workintech.ecommerce.entity.Order;
-import com.workintech.ecommerce.entity.User;
+import com.workintech.ecommerce_backend.dto.OrderRequestDto;
+import com.workintech.ecommerce_backend.dto.OrderResponseDto;
+import com.workintech.ecommerce_backend.dto.UserResponseDto;
+import com.workintech.ecommerce_backend.entity.Order;
+import com.workintech.ecommerce_backend.entity.User;
 
 import java.util.stream.Collectors;
 

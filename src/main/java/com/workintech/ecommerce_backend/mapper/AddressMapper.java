@@ -1,8 +1,8 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
-import com.workintech.ecommerce.dto.AddressRequestDto;
-import com.workintech.ecommerce.dto.AddressResponseDto;
-import com.workintech.ecommerce.entity.Address;
+import com.workintech.ecommerce_backend.dto.AddressRequestDto;
+import com.workintech.ecommerce_backend.dto.AddressResponseDto;
+import com.workintech.ecommerce_backend.entity.Address;
 
 public class AddressMapper {
 

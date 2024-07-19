@@ -1,12 +1,11 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
 
-import org.hibernate.query.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import com.workintech.ecommerce.entity.Product;
-import com.workintech.ecommerce.repository.ProductRepository;
+import com.workintech.ecommerce_backend.entity.Product;
+import com.workintech.ecommerce_backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

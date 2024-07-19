@@ -1,6 +1,6 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
-import com.workintech.ecommerce.entity.Product;
+import com.workintech.ecommerce_backend.entity.Product;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

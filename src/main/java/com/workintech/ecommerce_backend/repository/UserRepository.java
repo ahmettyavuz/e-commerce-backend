@@ -1,7 +1,7 @@
-package com.workintech.ecommerce.repository;
+package com.workintech.ecommerce_backend.repository;
 
 
-import com.workintech.ecommerce.entity.User;
+import com.workintech.ecommerce_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,9 +1,9 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
-import com.workintech.ecommerce.entity.Role;
-import com.workintech.ecommerce.entity.User;
-import com.workintech.ecommerce.repository.RoleRepository;
-import com.workintech.ecommerce.repository.UserRepository;
+import com.workintech.ecommerce_backend.entity.Role;
+import com.workintech.ecommerce_backend.entity.User;
+import com.workintech.ecommerce_backend.repository.RoleRepository;
+import com.workintech.ecommerce_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

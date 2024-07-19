@@ -1,5 +1,6 @@
 package com.workintech.ecommerce_backend.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "orders", schema = "fsweb")
 public class Order {
@@ -22,7 +24,8 @@ public class Order {
     private Instant date = Instant.now();
 
     @Column(nullable = false, length = 20,name="status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Enum_OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "adress_id", nullable = false)

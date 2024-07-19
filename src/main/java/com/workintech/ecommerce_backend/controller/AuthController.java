@@ -1,9 +1,9 @@
-package com.workintech.ecommerce.controller;
+package com.workintech.ecommerce_backend.controller;
 
-import com.workintech.ecommerce.dto.UserRegisterRequestDto;
-import com.workintech.ecommerce.dto.UserResponseDto;
-import com.workintech.ecommerce.mapper.UserMapper;
-import com.workintech.ecommerce.service.RegisterService;
+import com.workintech.ecommerce_backend.dto.UserRegisterRequestDto;
+import com.workintech.ecommerce_backend.dto.UserResponseDto;
+import com.workintech.ecommerce_backend.mapper.UserMapper;
+import com.workintech.ecommerce_backend.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

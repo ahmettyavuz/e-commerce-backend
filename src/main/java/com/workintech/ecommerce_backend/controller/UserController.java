@@ -1,10 +1,10 @@
-package com.workintech.ecommerce.controller;
+package com.workintech.ecommerce_backend.controller;
 
-import com.workintech.ecommerce.dto.OrderRequestDto;
-import com.workintech.ecommerce.dto.OrderResponseDto;
-import com.workintech.ecommerce.entity.Order;
-import com.workintech.ecommerce.mapper.OrderMapper;
-import com.workintech.ecommerce.service.OrderService;
+import com.workintech.ecommerce_backend.dto.OrderRequestDto;
+import com.workintech.ecommerce_backend.dto.OrderResponseDto;
+import com.workintech.ecommerce_backend.entity.Order;
+import com.workintech.ecommerce_backend.mapper.OrderMapper;
+import com.workintech.ecommerce_backend.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

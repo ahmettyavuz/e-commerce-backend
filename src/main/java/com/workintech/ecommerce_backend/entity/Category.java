@@ -1,4 +1,6 @@
 package com.workintech.ecommerce_backend.entity;
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +28,3 @@ public class Category {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
     private List<Product> products ;
 }
-

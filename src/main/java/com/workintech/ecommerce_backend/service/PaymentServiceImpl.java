@@ -1,7 +1,7 @@
-package com.workintech.ecommerce.service;
+package com.workintech.ecommerce_backend.service;
 
-import com.workintech.ecommerce.entity.Payment;
-import com.workintech.ecommerce.repository.PaymentRepository;
+import com.workintech.ecommerce_backend.entity.Payment;
+import com.workintech.ecommerce_backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

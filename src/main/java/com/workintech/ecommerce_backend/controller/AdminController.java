@@ -1,4 +1,4 @@
-package com.workintech.ecommerce.controller;
+package com.workintech.ecommerce_backend.controller;
 
 public class AdminController {
 

@@ -1,10 +1,10 @@
-package com.workintech.ecommerce.mapper;
+package com.workintech.ecommerce_backend.mapper;
 
 
-import com.workintech.ecommerce.dto.UserRegisterRequestDto;
-import com.workintech.ecommerce.dto.UserRequestDto;
-import com.workintech.ecommerce.dto.UserResponseDto;
-import com.workintech.ecommerce.entity.User;
+import com.workintech.ecommerce_backend.dto.UserRegisterRequestDto;
+import com.workintech.ecommerce_backend.dto.UserRequestDto;
+import com.workintech.ecommerce_backend.dto.UserResponseDto;
+import com.workintech.ecommerce_backend.entity.User;
 
 public class UserMapper {
 

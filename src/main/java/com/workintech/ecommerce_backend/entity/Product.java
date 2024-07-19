@@ -1,4 +1,5 @@
 package com.workintech.ecommerce_backend.entity;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
