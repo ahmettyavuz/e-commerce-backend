@@ -1,6 +1,8 @@
 package com.workintech.ecommerce_backend.service;
 
+import com.workintech.ecommerce_backend.dto.ProductRequestDto;
 import com.workintech.ecommerce_backend.entity.Payment;
+import com.workintech.ecommerce_backend.entity.Product;
 import com.workintech.ecommerce_backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,9 @@ public class PaymentServiceImpl implements PaymentService{
         Payment payment = findById(id);
         paymentRepository.delete(payment);
         return payment;
+    }
+
+    public Product createProduct(ProductRequestDto productRequestDto) {
+    return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.workintech.ecommerce_backend.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

@@ -1,18 +1,9 @@
 package com.workintech.ecommerce_backend.controller;
 
-
-
-import com.workintech.ecommerce_backend.dto.CategoryResponseDto;
-import com.workintech.ecommerce_backend.dto.OrderRequestDto;
-import com.workintech.ecommerce_backend.dto.OrderResponseDto;
 import com.workintech.ecommerce_backend.dto.ProductResponseDto;
-import com.workintech.ecommerce_backend.entity.Order;
 import com.workintech.ecommerce_backend.entity.Product;
 import com.workintech.ecommerce_backend.mapper.ProductMapper;
-import com.workintech.ecommerce_backend.service.CategoryService;
-import com.workintech.ecommerce_backend.service.OrderService;
 import com.workintech.ecommerce_backend.service.ProductService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

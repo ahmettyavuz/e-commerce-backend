@@ -1,6 +1,8 @@
 package com.workintech.ecommerce_backend.service;
 
 
+import com.workintech.ecommerce_backend.dto.ProductRequestDto;
+import org.hibernate.query.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -86,5 +88,10 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getProducts(int offset, int count) {
         Pageable pageable = PageRequest.of(offset, count);
         return productRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public Product createProduct(ProductRequestDto productRequestDto) {
+        return null;
     }
 }

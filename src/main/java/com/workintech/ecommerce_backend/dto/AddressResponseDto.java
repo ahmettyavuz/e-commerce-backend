@@ -1,7 +1,5 @@
 package com.workintech.ecommerce_backend.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public record AddressResponseDto(Long id,
                                  String description,
