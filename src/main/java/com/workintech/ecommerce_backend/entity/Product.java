@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "products", schema = "public")
+@Table(name = "products", schema = "fsweb")
 
 public class Product {
     @Id

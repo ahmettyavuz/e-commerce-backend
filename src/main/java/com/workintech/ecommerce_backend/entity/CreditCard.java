@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "credit_cards", schema = "public")
+@Table(name = "credit_cards", schema = "fsweb")
 public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class CreditCard {
     private Integer ccv;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="user_credit_card",schema = "public",joinColumns = @JoinColumn(name="credit_card_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
+    @JoinTable(name="user_credit_card",schema = "fsweb",joinColumns = @JoinColumn(name="credit_card_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
     private List<User> users;
 
 

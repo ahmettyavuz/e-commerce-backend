@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users", schema = "public")
+@Table(name = "users", schema = "fsweb")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,12 +54,12 @@ public class User implements UserDetails {
 
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="user_credit_card",schema = "public",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="credit_card_id"))
+    @JoinTable(name="user_credit_card",schema = "fsweb",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="credit_card_id"))
     private List<CreditCard> creditCards;
 
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="user_address",schema = "public",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="address_id"))
+    @JoinTable(name="user_address",schema = "fsweb",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="address_id"))
     private List<Address> addresses; // hard dependency yaparasak 74. saıra gerek kalmıyor bize ne dezavantajı var burasda direk hardepencdency yapmanın
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")

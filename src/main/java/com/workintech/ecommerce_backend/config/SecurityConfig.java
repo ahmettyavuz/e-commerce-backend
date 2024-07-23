@@ -21,12 +21,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authManagar(UserDetailsService userDetailsService){
+    public AuthenticationManager authManager(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(provider);
     }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {

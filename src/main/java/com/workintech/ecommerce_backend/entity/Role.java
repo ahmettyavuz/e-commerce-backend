@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "roles", schema = "public")
+@Table(name = "roles", schema = "fsweb")
 public class Role implements GrantedAuthority {
     @Id
     @Column(name="id")

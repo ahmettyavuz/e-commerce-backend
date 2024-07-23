@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "addresses", schema = "public")
+@Table(name = "addresses", schema = "fsweb")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Address {
     private String postalCode;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="user_address",schema = "public",joinColumns = @JoinColumn(name="address_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
+    @JoinTable(name="user_address",schema = "fsweb",joinColumns = @JoinColumn(name="address_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
     private List<User> users;
 
 

@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "images", schema = "public")
+@Table(name = "images", schema = "fsweb")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
