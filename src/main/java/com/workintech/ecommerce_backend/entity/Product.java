@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "products", schema = "fsweb")
+@Table(name = "products", schema = "public")
 
 public class Product {
     @Id
@@ -52,8 +52,7 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
     private List<Review> reviews ;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
-            fetch=FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="product_order",schema = "public",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="order_id"))
     private List<Order> orders;
 }

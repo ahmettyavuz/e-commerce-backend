@@ -10,7 +10,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "payments", schema = "fsweb")
+@Table(name = "payments", schema = "public")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
