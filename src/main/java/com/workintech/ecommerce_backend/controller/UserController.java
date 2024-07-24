@@ -40,8 +40,8 @@ public class UserController {
     // Sipariş verme
     @PostMapping("/order")
     public OrderResponseDto saveOrder(@Valid @RequestBody OrderRequestDto orderRequestDto,
-                                      @AuthenticationPrincipal String user_mail) {
-
+                                      Principal principal) {
+        String user_mail =  principal.getName();
         Order order = orderService.addOrder(orderRequestDto, user_mail);
         return OrderMapper.orderToOrderResponseDto(order);
     }
@@ -51,7 +51,6 @@ public class UserController {
     public AddressResponseDto saveAddress(@Valid @RequestBody AddressRequestDto addressRequestDto,
                                           Principal principal) {//otantikeyt olmayı isteyen alanalra request atarken kullanıcı bilgileri elimize her seferinde nereden geliyor
         String user_mail =  principal.getName();
-        System.out.println(user_mail);
         Address address = addressService.addAddress(addressRequestDto,user_mail);
         return AddressMapper.addressToAddressResponseDto(address);
     }
@@ -59,7 +58,8 @@ public class UserController {
     // Kredi kartı ekleme
     @PostMapping("/credit-card")
     public CreditCardResponseDto saveCreditCard(@Valid @RequestBody CreditCardRequestDto creditCardRequestDto,
-                                                @AuthenticationPrincipal String user_mail) {
+                                                Principal principal) {
+        String user_mail =  principal.getName();
         CreditCard creditCard = creditCardService.addCreditCard(creditCardRequestDto, user_mail);
         return CreditCardMapper.creditCardToCreditCardResponseDto(creditCard);
     }

@@ -54,10 +54,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order addOrder(OrderRequestDto orderRequestDto,String user_mail) {
         Optional<User> user = userRepository.findByEmail(user_mail);
-        Order order = OrderMapper.orderRequestDtoToOrder(orderRequestDto);
-        order.setUser(user.get());
-        user.get().addOrder(order);
-        userRepository.save(user.get());
-        return save(order);
+        if (user.isPresent()) {
+            Order order = OrderMapper.orderRequestDtoToOrder(orderRequestDto);
+
+            order.setUser(user.get());
+            user.get().addOrder(order);
+            userRepository.save(user.get());
+            return save(order);
+        }
+        throw new RuntimeException("Order not found");
     }
 }

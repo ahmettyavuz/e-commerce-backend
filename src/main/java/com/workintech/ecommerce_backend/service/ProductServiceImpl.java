@@ -2,6 +2,12 @@ package com.workintech.ecommerce_backend.service;
 
 
 import com.workintech.ecommerce_backend.dto.ProductRequestDto;
+import com.workintech.ecommerce_backend.entity.Category;
+import com.workintech.ecommerce_backend.entity.Image;
+import com.workintech.ecommerce_backend.mapper.ImageMapper;
+import com.workintech.ecommerce_backend.mapper.ProductMapper;
+import com.workintech.ecommerce_backend.repository.CategoryRepository;
+import com.workintech.ecommerce_backend.repository.ImageRepository;
 import org.hibernate.query.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +16,7 @@ import com.workintech.ecommerce_backend.entity.Product;
 import com.workintech.ecommerce_backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,11 +24,16 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService{
     //Bir servise birden fazla reposiroty inject edersem yan eksisi olur mu , (daha fazla repository eklersem daha basit jpql lerle işleri çözebiliyorum)
     private final ProductRepository productRepository;
+    private final ImageRepository imageRepository;
+    private final CategoryRepository categoryRepository;
+
 
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ImageRepository imageRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.imageRepository = imageRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -89,9 +101,29 @@ public class ProductServiceImpl implements ProductService{
         Pageable pageable = PageRequest.of(offset, count);
         return productRepository.findAll(pageable).getContent();
     }
-
+    @Transactional
     @Override
     public Product createProduct(ProductRequestDto productRequestDto) {
-        return null;
+
+        Category category = categoryRepository.getByName(productRequestDto.category());
+        Product product = ProductMapper.productRequestDtoToProduct(productRequestDto);
+        product.setCategory(category);
+
+       // System.out.println("geldim : " + product);
+       // product.setImages(productRequestDto.imageRequestDto().stream().map(ImageMapper::imageRequestDtoToImage).toList());
+
+// Burada image ları tek tek eklmek yerine productı doğrudan eklemeye çalıştığımda imeges tablosunda ki product_id
+// null olamaz hatası aldım çünkü product daha oluşturulmamıştı. (Product da id oluşturulurken bunu
+// generatedType ı SEQUENCE olsaydı bu sorun düzelirmiydi yoksa başka bir çözümü varmı)
+
+
+        productRequestDto.imageRequestDto().stream().forEach(item -> {
+            Image image = new Image();
+            image.setProduct(product);
+            image.setUrl(item.url());
+            imageRepository.save(image);
+        });
+
+        return product;
     }
 }

@@ -45,7 +45,5 @@ public class PaymentServiceImpl implements PaymentService{
         return payment;
     }
 
-    public Product createProduct(ProductRequestDto productRequestDto) {
-    return null;
-    }
+
 }

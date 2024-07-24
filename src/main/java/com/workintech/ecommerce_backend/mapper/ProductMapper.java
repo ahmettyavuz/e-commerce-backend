@@ -12,8 +12,8 @@ public class ProductMapper {
         Product product = new Product();
         product.setName(productRequestDto.name());
         product.setDescription(productRequestDto.description());
-        product.setCategory(CategoryMapper.categoryRequestDtoToCategory(productRequestDto.categoryRequestDto()));
-        product.setImages( productRequestDto.imageRequestDto().stream().map(ImageMapper::imageRequestDtoToImage).toList());
+       // product.setCategory(productRequestDto.category());
+        // product.setImages( productRequestDto.imageRequestDto().stream().map(ImageMapper::imageRequestDtoToImage).toList());
        // product.setImages( productRequestDto.imageRequestDto().stream().map( item -> ImageMapper.imageRequestDtoToImage(item)).collect(Collectors.toList()) );
         product.setPrice(productRequestDto.price());
         product.setStockQuantity(productRequestDto.stockQuantity());

@@ -34,8 +34,8 @@ public class SecurityConfig {
         return httpSecurity.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/welcome/**").permitAll();
                     auth.requestMatchers("/auth/**").permitAll();
-                    auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
-                    auth.requestMatchers("/user/**").hasAnyAuthority("USER", "ADMIN");
+                    auth.requestMatchers("/admin/**").hasAuthority("ADMİN");
+                    auth.requestMatchers("/user/**").hasAnyAuthority("USER", "ADMİN");
                     auth.anyRequest().authenticated();
         })
                     .formLogin(Customizer.withDefaults())

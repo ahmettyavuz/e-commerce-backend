@@ -28,7 +28,7 @@ public record ProductRequestDto(
         Enum_Gender gender,
 
         @Valid
-        CategoryRequestDto categoryRequestDto,
+        Enum_Category category,
 
         @Size(min = 0, max = 10, message = "Image list must not be more than 10 ")
         List<@Valid ImageRequestDto> imageRequestDto

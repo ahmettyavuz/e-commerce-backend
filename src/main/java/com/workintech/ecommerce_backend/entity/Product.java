@@ -42,12 +42,15 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     private Instant createdAt = Instant.now();
 
+    // Product oluşturulurken category yi savelememe rağmen neden category oluşturup save edip category id sine ulaşıyor.
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "category_id", nullable = false)
     private Category category; // ManyToMany de proje run edildiğinde component direk oluşturuluyor, oneTomany de neden oluşturulmuyor Lazy olarak bırakıyoruz ?
 
+    // product oluşturulurken içerisine imagesleri yolladığım zaman images tablosundaki product_id null olamaz hatası aldım
+    // 45. satırda böyle bit hata almıyorum
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    private List<Image> images ; // bunları hep List olarak tutuyorum Set olarak mı tutmalıyım , ayrımı nedir. JpaRepositorydeki metodlarda List döndürüyuor
+    private List<Image> images = new ArrayList<>(); // bunları hep List olarak tutuyorum Set olarak mı tutmalıyım , ayrımı nedir. JpaRepositorydeki metodlarda List döndürüyuor
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
     private List<Review> reviews ;
