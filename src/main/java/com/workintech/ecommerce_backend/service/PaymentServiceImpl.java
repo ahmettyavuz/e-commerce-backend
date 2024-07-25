@@ -1,8 +1,11 @@
 package com.workintech.ecommerce_backend.service;
 
+import com.workintech.ecommerce_backend.dto.PaymentRequestDto;
 import com.workintech.ecommerce_backend.dto.ProductRequestDto;
 import com.workintech.ecommerce_backend.entity.Payment;
 import com.workintech.ecommerce_backend.entity.Product;
+import com.workintech.ecommerce_backend.mapper.PaymentMapper;
+import com.workintech.ecommerce_backend.repository.CreditCardRepository;
 import com.workintech.ecommerce_backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +17,12 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService{
 
     private final PaymentRepository paymentRepository;
+    private final CreditCardRepository creditCardRepository;
 
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, CreditCardRepository creditCardRepository) {
         this.paymentRepository = paymentRepository;
+        this.creditCardRepository = creditCardRepository;
     }
 
 
@@ -42,6 +47,14 @@ public class PaymentServiceImpl implements PaymentService{
     public Payment delete(Long id) {
         Payment payment = findById(id);
         paymentRepository.delete(payment);
+        return payment;
+    }
+
+    @Override
+    public Payment addPayment(PaymentRequestDto paymentRequestDto){
+        Payment payment = PaymentMapper.paymentReqestDtoToPayment(paymentRequestDto);
+        payment.setCreditCard(creditCardRepository.findById(paymentRequestDto.creditCardId()).get());
+
         return payment;
     }
 

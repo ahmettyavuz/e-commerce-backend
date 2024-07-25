@@ -56,6 +56,6 @@ public class Product {
     private List<Review> reviews ;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="product_order",schema = "public",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="order_id"))
+    @JoinTable(name="product_order",schema = "fsweb",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="order_id"))
     private List<Order> orders;
 }

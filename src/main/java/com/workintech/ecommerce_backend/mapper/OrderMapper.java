@@ -12,9 +12,9 @@ public class OrderMapper {
 
     public static Order orderRequestDtoToOrder(OrderRequestDto orderRequestDto){
         Order order = new Order();
-        order.setAmount(orderRequestDto.amount());
-        order.setProducts(orderRequestDto.productRequestDtos().stream().map(ProductMapper::productRequestDtoToProduct).toList());
-        order.setAddress(AddressMapper.addressRequestDtoToAddress(orderRequestDto.addressRequestDto()));
+
+      //  order.setProducts(orderRequestDto.productRequestDtos().stream().map(ProductMapper::productRequestDtoToProduct).toList());
+      //  order.setAddress(AddressMapper.addressRequestDtoToAddress(orderRequestDto.addressRequestDto()));
         order.setPayment(PaymentMapper.paymentReqestDtoToPayment(orderRequestDto.paymentRequestDto()));
         return order;
     }
