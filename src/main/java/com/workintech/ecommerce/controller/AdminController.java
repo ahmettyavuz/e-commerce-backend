@@ -41,8 +41,8 @@ public class AdminController {
     // Kullanıcı banlamak
     @PostMapping("/users/ban")
     public UserResponseDto banUser(@Valid @RequestBody UserBanRequestDto userBanRequestDto) {
-        ;
-        return UserMapper.userToUserResponseDto(userService.banUser(userBanRequestDto.userId(), userBanRequestDto.reason()));
+
+        return UserMapper.userToUserResponseDto(userService.banUser(userBanRequestDto));
     }
 
     // Category ekleme

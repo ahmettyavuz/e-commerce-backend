@@ -6,6 +6,7 @@ import com.workintech.ecommerce.entity.Enum_Gender;
 import com.workintech.ecommerce.entity.Product;
 import com.workintech.ecommerce.mapper.ProductMapper;
 import com.workintech.ecommerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +55,7 @@ public class WelcomeController {
     }
 
     @GetMapping("/category/gender")
-    List<ProductResponseDto> getByCategoryAndGender( @RequestParam Enum_Category name,
+    List<ProductResponseDto> getByCategoryAndGender(@RequestParam Enum_Category name,
                                           @RequestParam Enum_Gender gender,
                                           @RequestParam(defaultValue = "0")  int offset,
                                           @RequestParam(defaultValue = "10")  int count){
