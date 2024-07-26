@@ -25,19 +25,16 @@ public class  OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final AddressRepository addressRepository;
-    private final PaymentService paymentService;
     private final CreditCardRepository creditCardRepository;
 
 
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, PaymentService paymentService, CreditCardRepository creditCardRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, CreditCardRepository creditCardRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.addressRepository = addressRepository;
-
-        this.paymentService = paymentService;
         this.creditCardRepository = creditCardRepository;
     }
 
@@ -97,7 +94,8 @@ public class  OrderServiceImpl implements OrderService {
         order.setPayment(payment); // Siparişi ödemeye bağla
 
         // Siparişi ve ödemeyi kaydet
-        return orderRepository.save(order); // Payment otomatik olarak kaydedilir
+        user.get().addOrder(order);
+        return order; // Payment otomatik olarak kaydedilir
     }
 
     private Double calculateTotalAmount(List<Product> products) {

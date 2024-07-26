@@ -109,13 +109,12 @@ public class ProductServiceImpl implements ProductService{
 
        product.setCategory(category);
 
-      // category.addProduct(product);
-        Product savedProduct = save(product);
-        System.out.println("girdim :" + savedProduct);
+        category.addProduct(product);
+        System.out.println("girdim :" + product);
 
-        savedProduct.setImages(productRequestDto.imageRequestDto().stream().map(item -> {
+        product.setImages(productRequestDto.imageRequestDto().stream().map(item -> {
             Image image = new Image();
-            image.setProduct(savedProduct);
+            image.setProduct(product);
             image.setUrl(item.url());
             return imageRepository.save(image);
         }).toList());
@@ -135,6 +134,6 @@ public class ProductServiceImpl implements ProductService{
             imageRepository.save(image);
         });*/
 
-        return savedProduct;
+        return product;
     }
 }
