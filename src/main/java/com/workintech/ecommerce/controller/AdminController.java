@@ -3,12 +3,14 @@ package com.workintech.ecommerce.controller;
 import com.workintech.ecommerce.dto.*;
 import com.workintech.ecommerce.entity.Category;
 import com.workintech.ecommerce.entity.Product;
+import com.workintech.ecommerce.entity.User;
 import com.workintech.ecommerce.mapper.CategoryMapper;
 import com.workintech.ecommerce.mapper.ProductMapper;
+import com.workintech.ecommerce.mapper.UserMapper;
 import com.workintech.ecommerce.service.CategoryService;
 import com.workintech.ecommerce.service.ProductService;
 import com.workintech.ecommerce.service.UserService;
-import com.workintech.ecommerce_backend.dto.*;
+import com.workintech.ecommerce.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,8 +40,9 @@ public class AdminController {
 
     // Kullanıcı banlamak
     @PostMapping("/users/ban")
-    public void banUser(@Valid @RequestBody UserBanRequestDto userBanRequestDto) {
-        userService.banUser(userBanRequestDto.userId(), userBanRequestDto.reason());
+    public UserResponseDto banUser(@Valid @RequestBody UserBanRequestDto userBanRequestDto) {
+        ;
+        return UserMapper.userToUserResponseDto(userService.banUser(userBanRequestDto.userId(), userBanRequestDto.reason()));
     }
 
     // Category ekleme

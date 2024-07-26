@@ -2,12 +2,11 @@ package com.workintech.ecommerce.service;
 
 
 import com.workintech.ecommerce.dto.ProductRequestDto;
-import com.workintech.ecommerce.entity.Image;
-import com.workintech.ecommerce.entity.Product;
+import com.workintech.ecommerce.entity.*;
+import com.workintech.ecommerce.mapper.ImageMapper;
 import com.workintech.ecommerce.repository.CategoryRepository;
 import com.workintech.ecommerce.repository.ImageRepository;
 import com.workintech.ecommerce.repository.ProductRepository;
-import com.workintech.ecommerce.entity.Category;
 import com.workintech.ecommerce.mapper.ProductMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -88,7 +87,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getByCategoryAndGender(String name, String gender, int offset, int count) {
+    public List<Product> getByCategoryAndGender(Enum_Category name, Enum_Gender gender, int offset, int count) {
         Pageable pageable = PageRequest.of(offset,count);
        return productRepository.getByCategoryAndGender(name,gender,pageable).getContent();
     }
@@ -99,13 +98,28 @@ public class ProductServiceImpl implements ProductService{
         Pageable pageable = PageRequest.of(offset, count);
         return productRepository.findAll(pageable).getContent();
     }
+
     @Transactional
     @Override
     public Product createProduct(ProductRequestDto productRequestDto) {
 
-        Category category = categoryRepository.getByName(productRequestDto.category());
         Product product = ProductMapper.productRequestDtoToProduct(productRequestDto);
-        product.setCategory(category);
+
+        Category category = categoryRepository.getByName(productRequestDto.category());
+
+       product.setCategory(category);
+
+      // category.addProduct(product);
+        Product savedProduct = save(product);
+        System.out.println("girdim :" + savedProduct);
+
+        savedProduct.setImages(productRequestDto.imageRequestDto().stream().map(item -> {
+            Image image = new Image();
+            image.setProduct(savedProduct);
+            image.setUrl(item.url());
+            return imageRepository.save(image);
+        }).toList());
+
 
        // System.out.println("geldim : " + product);
        // product.setImages(productRequestDto.imageRequestDto().stream().map(ImageMapper::imageRequestDtoToImage).toList());
@@ -114,14 +128,13 @@ public class ProductServiceImpl implements ProductService{
 // null olamaz hatası aldım çünkü product daha oluşturulmamıştı. (Product da id oluşturulurken bunu
 // generatedType ı SEQUENCE olsaydı bu sorun düzelirmiydi yoksa başka bir çözümü varmı)
 
-
-        productRequestDto.imageRequestDto().stream().forEach(item -> {
+   /*     productRequestDto.imageRequestDto().stream().forEach(item -> {
             Image image = new Image();
             image.setProduct(product);
             image.setUrl(item.url());
             imageRepository.save(image);
-        });
+        });*/
 
-        return product;
+        return savedProduct;
     }
 }

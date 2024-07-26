@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,10 +28,12 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Enum_OrderStatus status;
 
-    @ManyToOne
+    //Unidirectional
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    //bidirectional
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -38,24 +41,33 @@ public class Order {
     @Column(nullable = false,name="amount")
     private Double amount;
 
+    //unidirectional
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="product_order",schema = "fsweb",joinColumns = @JoinColumn(name="order_id"),inverseJoinColumns = @JoinColumn(name="product_id"))
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
+    //bidirectional olması sıkıntı çıkarabilir
     @OneToOne(cascade=CascadeType.ALL,mappedBy = "order")
     private Payment payment;
 
-        public void setPayment(Payment payment){
-       this.payment=payment;
-       if(payment != null){
-           payment.setOrder(this);
-       }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        Object $id = this.getId();
+        result = result * 59 + ($id == null ? 43 : $id.hashCode());
+        Object $amount = this.getAmount();
+        result = result * 59 + ($amount == null ? 43 : $amount.hashCode());
+        Object $date = this.getDate();
+        result = result * 59 + ($date == null ? 43 : $date.hashCode());
+        Object $status = this.getStatus();
+        result = result * 59 + ($status == null ? 43 : $status.hashCode());
+        return result;
     }
 
     @Override
     public String toString() {
         Long var10000 = this.getId();
-        return "Order(id=" + var10000 + ", date=" + this.getDate() + ", status=" + this.getStatus() + ", address=" + this.getAddress() + ", user=" + this.getUser() + ", amount=" + this.getAmount() + ", products=" + this.getProducts() + ")";
+        return "Order(id=" + var10000 + ", date=" + this.getDate() + ", status=" + this.getStatus() + ", amount=" + this.getAmount() +")";
     }
-
 }

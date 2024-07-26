@@ -1,6 +1,8 @@
 package com.workintech.ecommerce.repository;
 
 
+import com.workintech.ecommerce.entity.Enum_Category;
+import com.workintech.ecommerce.entity.Enum_Gender;
 import com.workintech.ecommerce.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value="SELECT p FROM Product p WHERE p.category.name= :name")
     List<Product> getByCategory(String name);
     @Query(value="SELECT p FROM Product p WHERE p.category.name= :name and p.gender= :gender")
-    Page<Product> getByCategoryAndGender(@Param("name") String name, @Param("gender") String gender, Pageable pageable);//Stringleri enum olarak alabilirmiyiz daha sonra bakarsın
+    Page<Product> getByCategoryAndGender(@Param("name") Enum_Category name, @Param("gender") Enum_Gender gender, Pageable pageable);//Stringleri enum olarak alabilirmiyiz daha sonra bakarsın
 
 }

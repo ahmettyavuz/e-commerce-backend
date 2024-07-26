@@ -59,10 +59,10 @@ public class CreditCardServiceImpl implements CreditCardService{
         if (user.isPresent()) {
 
             CreditCard creditCard = CreditCardMapper.creditCardRequestDtoCreditCard(creditCardRequestDto);
-            creditCard.addUser(user.get());
-            // user.get().addCreditCard(creditCard);
+           // creditCard.addUser(user.get());
+            user.get().addCreditCard(creditCard);
             // userRepository.save(user.get());
-            return save(creditCard);
+            return creditCard;
         }
         throw new RuntimeException("Credit Card not found");
     }

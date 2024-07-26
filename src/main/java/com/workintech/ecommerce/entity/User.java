@@ -8,9 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @Data
@@ -54,39 +52,34 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_credit_card", schema = "fsweb", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "credit_card_id"))
-    private List<CreditCard> creditCards;
+    private Set<CreditCard> creditCards = new HashSet<>();
 
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_address", schema = "fsweb", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
-    private List<Address> addresses; // hard dependency yaparasak 74. saıra gerek kalmıyor bize ne dezavantajı var burasda direk hardepencdency yapmanın
+    private List<Address> addresses = new ArrayList<>(); // hard dependency yaparasak 74. saıra gerek kalmıyor bize ne dezavantajı var burasda direk hardepencdency yapmanın
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Review> reviews;
+    private Set<Review> reviews = new LinkedHashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Order> orders;
+    private Set<Order> orders = new HashSet<>();
 
+    public void addOrder(Order order){
+        orders.add(order);
+    }
 
-    public void addAddress(Address address) {
-        if (addresses == null) {
-            addresses = new ArrayList<>();
-        }
+    public void addReviews(Review review){
+        reviews.add(review);
+    }
+
+    public void addAddress(Address address){
         addresses.add(address);
     }
 
-    public void addCreditCard(CreditCard creditCard) {
-        if (creditCards == null) {
-            creditCards = new ArrayList<>();
-        }
+    public void addCreditCard(CreditCard creditCard){
         creditCards.add(creditCard);
-    }
-
-    public void addOrder(Order order) {
-        if (orders == null) {
-            orders = new ArrayList<>();
-        }
-        orders.add(order);
+        creditCard.addUser(this);
     }
 
     @Override
@@ -122,8 +115,34 @@ public class User implements UserDetails {
         return Boolean.TRUE.equals(enabled);
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        Object $id = this.getId();
+        result = result * 59 + ($id == null ? 43 : $id.hashCode());
+        Object $accountLocked = this.getAccountLocked();
+        result = result * 59 + ($accountLocked == null ? 43 : $accountLocked.hashCode());
+        Object $enabled = this.getEnabled();
+        result = result * 59 + ($enabled == null ? 43 : $enabled.hashCode());
+        Object $firstName = this.getFirstName();
+        result = result * 59 + ($firstName == null ? 43 : $firstName.hashCode());
+        Object $lastName = this.getLastName();
+        result = result * 59 + ($lastName == null ? 43 : $lastName.hashCode());
+        Object $email = this.getEmail();
+        result = result * 59 + ($email == null ? 43 : $email.hashCode());
+        Object $password = this.getPassword();
+        result = result * 59 + ($password == null ? 43 : $password.hashCode());
+        Object $accountExpirationDate = this.getAccountExpirationDate();
+        result = result * 59 + ($accountExpirationDate == null ? 43 : $accountExpirationDate.hashCode());
+        Object $credentialsExpirationDate = this.getCredentialsExpirationDate();
+        result = result * 59 + ($credentialsExpirationDate == null ? 43 : $credentialsExpirationDate.hashCode());
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "User(id=" + this.getId() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", password=" + this.getPassword() + ", accountExpirationDate=" + this.getAccountExpirationDate() + ", accountLocked=" + this.getAccountLocked() + ", credentialsExpirationDate=" + this.getCredentialsExpirationDate() + ", enabled=" + this.getEnabled() + ", role=" + this.getRole() + ", creditCards=" + this.getCreditCards() + ", addresses=" + this.getAddresses() + ", reviews=" + this.getReviews() +")";
+        Long var10000 = this.getId();
+        return "User(id=" + var10000 + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", password=" + this.getPassword() + ", accountExpirationDate=" + this.getAccountExpirationDate() + ", accountLocked=" + this.getAccountLocked() + ", credentialsExpirationDate=" + this.getCredentialsExpirationDate() + ", enabled=" + this.getEnabled() + ", role=" + this.getRole() + ", creditCards=" + this.getCreditCards() + ", addresses=" + this.getAddresses() + ", reviews=" + this.getReviews() + ", orders=" + this.getOrders() + ")";
     }
 }
 

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,13 +29,12 @@ public class Category {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
-    private List<Product> products = new ArrayList<>();
+    private Set<Product> products = new HashSet<>();
+
+    public void addProduct(Product product){
+        products.add(product);
+    }
 
     // StackOverFlow hatasından dolayı toStringi ezmek zorunda kaldım bunu başka bir çözümü varmı. Spring toStringi nerede neden çağrıyor ve ne işe yarıyor.
 
-    @Override
-    public String toString() {
-        Long var10000 = this.getId();
-        return "Category(id=" + var10000 + ", name=" + this.getName() + ", description=" + this.getDescription() +")";
-    }
 }

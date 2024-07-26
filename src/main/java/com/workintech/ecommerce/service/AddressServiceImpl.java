@@ -60,11 +60,9 @@ public class AddressServiceImpl implements  AddressService{
         Optional<User> user = userRepository.findByEmail(user_mail);
         if (user.isPresent()) {
             Address address = AddressMapper.addressRequestDtoToAddress(addressRequestDto);
-
-           //  user.get().addAddress(address);
+           // user.get().addAddress(address);
             address.addUser(user.get());
-         //   userRepository.save(user.get());
-            return save(address);
+            return address;
         }
         throw new RuntimeException("User not found");
     }

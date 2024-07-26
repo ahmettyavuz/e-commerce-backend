@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -53,9 +52,37 @@ public class Product {
     private List<Image> images = new ArrayList<>(); // bunları hep List olarak tutuyorum Set olarak mı tutmalıyım , ayrımı nedir. JpaRepositorydeki metodlarda List döndürüyuor
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    private List<Review> reviews ;
+    private Set<Review> reviews = new  LinkedHashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="product_order",schema = "fsweb",joinColumns = @JoinColumn(name="product_id"),inverseJoinColumns = @JoinColumn(name="order_id"))
-    private List<Order> orders;
+    @Override
+    public int hashCode() {
+        boolean PRIME = true;
+        int result = 1;
+        Object $id = this.getId();
+        result = result * 59 + ($id == null ? 43 : $id.hashCode());
+        Object $price = this.getPrice();
+        result = result * 59 + ($price == null ? 43 : $price.hashCode());
+        Object $rating = this.getRating();
+        result = result * 59 + ($rating == null ? 43 : $rating.hashCode());
+        Object $stockQuantity = this.getStockQuantity();
+        result = result * 59 + ($stockQuantity == null ? 43 : $stockQuantity.hashCode());
+        Object $name = this.getName();
+        result = result * 59 + ($name == null ? 43 : $name.hashCode());
+        Object $description = this.getDescription();
+        result = result * 59 + ($description == null ? 43 : $description.hashCode());
+        Object $gender = this.getGender();
+        result = result * 59 + ($gender == null ? 43 : $gender.hashCode());
+        Object $createdAt = this.getCreatedAt();
+        result = result * 59 + ($createdAt == null ? 43 : $createdAt.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        Long var10000 = this.getId();
+        return "Product(id=" + var10000 + ", name=" + this.getName() + ", description=" + this.getDescription() + ", price=" + this.getPrice() + ", rating=" + this.getRating() + ", stockQuantity=" + this.getStockQuantity() + ", gender=" + this.getGender() + ", createdAt=" + this.getCreatedAt() +")";
+    }
+
+
+
 }

@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
         return findByEmail(username);
     }
 
-    public void banUser(Long userId, String reason) {
+    public User banUser(Long userId, String reason) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 
@@ -37,6 +37,6 @@ public class UserService implements UserDetailsService {
         user.setEnabled(false); // Kullanıcıyı devre dışı bırak
         // Ban sebebini kaydetmek için ek bir alan varsa, burada güncelleyebilirsiniz.
 
-        userRepository.save(user); // Güncellenmiş kullanıcıyı kaydet
+       return userRepository.save(user); // Güncellenmiş kullanıcıyı kaydet
     }
 }

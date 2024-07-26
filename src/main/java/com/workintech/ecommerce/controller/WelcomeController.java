@@ -1,6 +1,8 @@
 package com.workintech.ecommerce.controller;
 
 import com.workintech.ecommerce.dto.ProductResponseDto;
+import com.workintech.ecommerce.entity.Enum_Category;
+import com.workintech.ecommerce.entity.Enum_Gender;
 import com.workintech.ecommerce.entity.Product;
 import com.workintech.ecommerce.mapper.ProductMapper;
 import com.workintech.ecommerce.service.ProductService;
@@ -52,8 +54,8 @@ public class WelcomeController {
     }
 
     @GetMapping("/category/gender")
-    List<ProductResponseDto> getByCategoryAndGender( @RequestParam String name,
-                                          @RequestParam String gender,
+    List<ProductResponseDto> getByCategoryAndGender( @RequestParam Enum_Category name,
+                                          @RequestParam Enum_Gender gender,
                                           @RequestParam(defaultValue = "0")  int offset,
                                           @RequestParam(defaultValue = "10")  int count){
 
