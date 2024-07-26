@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class  OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -59,18 +59,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Order addOrder(OrderRequestDto orderRequestDto,String user_mail) {
+    public Order addOrder(OrderRequestDto orderRequestDto, String user_mail) {
         Optional<User> user = userRepository.findByEmail(user_mail);
-        List<Product> productList = orderRequestDto.productIdList().stream().map(item -> productRepository.findById(item).get()).toList();
+        List<Product> productList = orderRequestDto.productIdList().stream()
+                .map(item -> productRepository.findById(item)
+                        .orElseThrow(() -> new RuntimeException("Product not found")))
+                .toList();
+
         Double totalAmount = productList.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
 
-       /* if(!Objects.equals(orderRequestDto.paymentRequestDto().amount(), totalAmount)){
-           // throw new null;
-        }*/
+        Address address = addressRepository.findById(orderRequestDto.addressId())
+                .orElseThrow(() -> new RuntimeException("Address not found"));
 
-        Address address = addressRepository.findById(orderRequestDto.addressId()).get();
         if (user.isPresent()) {
             Order order = OrderMapper.orderRequestDtoToOrder(orderRequestDto);
             order.setProducts(productList);
@@ -78,9 +80,18 @@ public class OrderServiceImpl implements OrderService {
             order.setAddress(address);
             order.setAmount(totalAmount);
             order.setStatus(orderRequestDto.status());
+
             Order savedOrder = save(order);
-            savedOrder.setPayment(paymentService.addPayment(orderRequestDto.paymentRequestDto()));
-            return savedOrder;
+            System.out.println("girdim order :" + savedOrder);
+
+            // Ödemeyi ekle
+            Payment payment = paymentService.addPayment(orderRequestDto.paymentRequestDto());
+            payment.setOrder(savedOrder); // Ödeme nesnesinin order referansını ayarla
+
+            paymentService.save(payment); // Ödemeyi kaydet
+            System.out.println("girdim payment :" + payment);
+            savedOrder.setPayment(payment); // Sipariş nesnesinin payment referansını ayarla
+            return save(savedOrder); // Güncellenmiş siparişi kaydet
         }
         throw new RuntimeException("Order not found");
     }

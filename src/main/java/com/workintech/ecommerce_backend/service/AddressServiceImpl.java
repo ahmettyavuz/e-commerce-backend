@@ -62,8 +62,8 @@ public class AddressServiceImpl implements  AddressService{
         if (user.isPresent()) {
             Address address = AddressMapper.addressRequestDtoToAddress(addressRequestDto);
 
+           //  user.get().addAddress(address);
             address.addUser(user.get());
-         // user.get().addAddress(address);
          //   userRepository.save(user.get());
             return save(address);
         }

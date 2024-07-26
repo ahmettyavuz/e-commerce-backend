@@ -46,4 +46,17 @@ public class Order {
     @OneToOne(cascade=CascadeType.ALL,mappedBy = "order")
     private Payment payment;
 
+        public void setPayment(Payment payment){
+       this.payment=payment;
+       if(payment != null){
+           payment.setOrder(this);
+       }
+    }
+
+    @Override
+    public String toString() {
+        Long var10000 = this.getId();
+        return "Order(id=" + var10000 + ", date=" + this.getDate() + ", status=" + this.getStatus() + ", address=" + this.getAddress() + ", user=" + this.getUser() + ", amount=" + this.getAmount() + ", products=" + this.getProducts() + ")";
+    }
+
 }

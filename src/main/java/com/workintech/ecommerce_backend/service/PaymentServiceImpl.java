@@ -2,6 +2,8 @@ package com.workintech.ecommerce_backend.service;
 
 import com.workintech.ecommerce_backend.dto.PaymentRequestDto;
 import com.workintech.ecommerce_backend.dto.ProductRequestDto;
+import com.workintech.ecommerce_backend.entity.Enum_PaymentMethod;
+import com.workintech.ecommerce_backend.entity.Enum_PaymentStatus;
 import com.workintech.ecommerce_backend.entity.Payment;
 import com.workintech.ecommerce_backend.entity.Product;
 import com.workintech.ecommerce_backend.mapper.PaymentMapper;
@@ -54,7 +56,6 @@ public class PaymentServiceImpl implements PaymentService{
     public Payment addPayment(PaymentRequestDto paymentRequestDto){
         Payment payment = PaymentMapper.paymentReqestDtoToPayment(paymentRequestDto);
         payment.setCreditCard(creditCardRepository.findById(paymentRequestDto.creditCardId()).get());
-
         return payment;
     }
 

@@ -36,8 +36,17 @@ public class Payment {
     @JoinColumn(name = "order_id", nullable = false, unique = true)
     private Order order;
 
+
+
+
     @ManyToOne
     @JoinColumn(name = "credit_card_id")
     private CreditCard creditCard;
+
+    @Override
+    public String toString() {
+        Long var10000 = this.getId();
+        return "Payment(id=" + var10000 + ", method=" + this.getMethod() + ", status=" + this.getStatus() + ", date=" + this.getDate() + ", amount=" + this.getAmount() + ", creditCard=" + this.getCreditCard() + ")";
+    }
 
 }
