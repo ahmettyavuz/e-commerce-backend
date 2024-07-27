@@ -4,8 +4,6 @@ import com.workintech.ecommerce.dto.OrderRequestDto;
 import com.workintech.ecommerce.dto.PaymentRequestDto;
 import com.workintech.ecommerce.entity.*;
 import com.workintech.ecommerce.exceptions.ErrorException;
-import com.workintech.ecommerce.mapper.OrderMapper;
-import com.workintech.ecommerce.mapper.PaymentMapper;
 import com.workintech.ecommerce.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 
 class OrderServiceImplTest {
 

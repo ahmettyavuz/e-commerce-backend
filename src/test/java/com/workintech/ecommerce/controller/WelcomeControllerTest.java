@@ -2,6 +2,7 @@ package com.workintech.ecommerce.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.workintech.ecommerce.dto.ProductResponseDto;
+import com.workintech.ecommerce.entity.Category;
 import com.workintech.ecommerce.entity.Enum_Category;
 import com.workintech.ecommerce.entity.Enum_Gender;
 import com.workintech.ecommerce.entity.Product;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -33,54 +35,56 @@ public class WelcomeControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private Product product1;
+    private Product product2;
+
     @BeforeEach
     void setUp() {
-        // Setup işlemleri yapılabilir
+        // Test ürünleri oluşturuluyor
+        product1 = new Product();
+        product1.setId(1L);
+        product1.setName("newBalance");
+        product1.setCategory(new Category());
+        product1.setGender(Enum_Gender.UNISEX);
+
+        product2 = new Product();
+        product2.setId(2L);
+        product2.setName("nike");
+        product2.setCategory(new Category());
+        product2.setGender(Enum_Gender.UNISEX);
+
+        List<Product> products = Arrays.asList(product1, product2);
+        List<ProductResponseDto> dtos = products.stream()
+                .map(ProductMapper::productToProductResponseDto)
+                .toList();
+
+        when(productService.getProducts(0, 10)).thenReturn(products);
+        when(productService.getByCategoryAndGender(Enum_Category.AYAKKABI, Enum_Gender.UNISEX, 0, 10)).thenReturn(products);
     }
 
     @Test
     void getProducts() throws Exception {
-        // Test verilerini hazırlayalım
-        Product product1 = new Product();
-        Product product2 = new Product();
-        List<Product> products = Arrays.asList(product1, product2);
-
-        ProductResponseDto dto1 = ProductMapper.productToProductResponseDto(product1);
-        ProductResponseDto dto2 = ProductMapper.productToProductResponseDto(product2);
-        List<ProductResponseDto> dtos = Arrays.asList(dto1, dto2);
-
-        // ProductService'in getProducts methodunu mocklayalım
-        when(productService.getProducts(0, 10)).thenReturn(products);
-
-        // GET /welcome/ endpoint'ini test edelim
         mockMvc.perform(MockMvcRequestBuilders.get("/welcome/")
                         .param("offset", "0")
-                        .param("count", "10"))
+                        .param("count", "10")
+                        .with(SecurityMockMvcRequestPostProcessors.user("user").password("password").roles("USER")))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(dtos)));
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(
+                        Arrays.asList(ProductMapper.productToProductResponseDto(product1), ProductMapper.productToProductResponseDto(product2))
+                )));
     }
 
     @Test
     void getByCategoryAndGender() throws Exception {
-        // Test verilerini hazırlayalım
-        Product product1 = new Product();
-        Product product2 = new Product();
-        List<Product> products = Arrays.asList(product1, product2);
-
-        ProductResponseDto dto1 = ProductMapper.productToProductResponseDto(product1);
-        ProductResponseDto dto2 = ProductMapper.productToProductResponseDto(product2);
-        List<ProductResponseDto> dtos = Arrays.asList(dto1, dto2);
-
-        // ProductService'in getByCategoryAndGender methodunu mocklayalım
-        when(productService.getByCategoryAndGender(Enum_Category.AYAKKABI, Enum_Gender.ERKEK, 0, 10)).thenReturn(products);
-
-        // GET /welcome/category/gender endpoint'ini test edelim
         mockMvc.perform(MockMvcRequestBuilders.get("/welcome/category/gender")
                         .param("name", Enum_Category.AYAKKABI.name())
-                        .param("gender", Enum_Gender.ERKEK.name())
+                        .param("gender", Enum_Gender.UNISEX.name())
                         .param("offset", "0")
-                        .param("count", "10"))
+                        .param("count", "10")
+                        .with(SecurityMockMvcRequestPostProcessors.user("user").password("password").roles("USER")))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(dtos)));
+                .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(
+                        Arrays.asList(ProductMapper.productToProductResponseDto(product1), ProductMapper.productToProductResponseDto(product2))
+                )));
     }
 }
