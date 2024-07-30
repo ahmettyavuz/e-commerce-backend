@@ -4,22 +4,22 @@ import com.workintech.ecommerce.dto.CreditCardRequestDto;
 import com.workintech.ecommerce.entity.CreditCard;
 import com.workintech.ecommerce.entity.User;
 import com.workintech.ecommerce.exceptions.ErrorException;
-import com.workintech.ecommerce.mapper.CreditCardMapper;
 import com.workintech.ecommerce.repository.CreditCardRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class CreditCardServiceImplTest {
 
     @Mock
@@ -37,8 +37,6 @@ class CreditCardServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-
         creditCard = new CreditCard();
         creditCard.setId(1L);
         creditCard.setNo("1234567812345678");
@@ -112,7 +110,6 @@ class CreditCardServiceImplTest {
     @Test
     void addCreditCard() {
         when(userService.findByEmail("user@example.com")).thenReturn(user);
-        when(creditCardRepository.save(any(CreditCard.class))).thenReturn(creditCard);
 
         CreditCard addedCreditCard = creditCardService.addCreditCard(creditCardRequestDto, "user@example.com");
 

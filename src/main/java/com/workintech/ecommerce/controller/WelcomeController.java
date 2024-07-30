@@ -24,7 +24,26 @@ public class WelcomeController {
         this.productService = productService;
     }
 
-/*
+
+    @GetMapping("/")
+    public List<ProductResponseDto> getProducts(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
+        List<Product> products = productService.getProducts(offset, limit);
+        return products.stream().map(ProductMapper::productToProductResponseDto).toList();
+    }
+
+    @GetMapping("/category/gender")
+    List<ProductResponseDto> getByCategoryAndGender(@RequestParam Enum_Category name,
+                                          @RequestParam Enum_Gender gender,
+                                          @RequestParam(defaultValue = "0")  int offset,
+                                          @RequestParam(defaultValue = "10")  int limit){
+
+        List<Product> products = productService.getByCategoryAndGender(name,gender,offset,limit);
+        return products.stream().map(ProductMapper::productToProductResponseDto).toList();
+    }
+
+    /*
     @GetMapping("/product")
     List<ProductResponseDto> findAllProduct(){
         List<Product> products = productService.findAll();
@@ -45,24 +64,6 @@ public class WelcomeController {
         return categoryService.findAll();
     }
   */
-
-    @GetMapping("/")
-    public List<ProductResponseDto> getProducts(
-            @RequestParam(defaultValue = "0") int offset,
-            @RequestParam(defaultValue = "10") int count) {
-        List<Product> products = productService.getProducts(offset, count);
-        return products.stream().map(ProductMapper::productToProductResponseDto).toList();
-    }
-
-    @GetMapping("/category/gender")
-    List<ProductResponseDto> getByCategoryAndGender(@RequestParam Enum_Category name,
-                                          @RequestParam Enum_Gender gender,
-                                          @RequestParam(defaultValue = "0")  int offset,
-                                          @RequestParam(defaultValue = "10")  int count){
-
-        List<Product> products = productService.getByCategoryAndGender(name,gender,offset,count);
-        return products.stream().map(ProductMapper::productToProductResponseDto).toList();
-    }
 
   /*
 

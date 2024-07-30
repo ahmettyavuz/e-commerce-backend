@@ -7,9 +7,10 @@ import com.workintech.ecommerce.exceptions.ErrorException;
 import com.workintech.ecommerce.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
@@ -20,7 +21,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-
+@ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
     @Mock
@@ -51,8 +52,6 @@ class OrderServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-
         order = new Order();
         order.setId(1L);
         order.setDate(Instant.now());
@@ -80,15 +79,13 @@ class OrderServiceImplTest {
 
         orderRequestDto = new OrderRequestDto(
                 1L,
-                Enum_OrderStatus.HAZIRLANIYOR,// addressId
+                Enum_OrderStatus.HAZIRLANIYOR, // addressId
                 new PaymentRequestDto(
                         Enum_PaymentMethod.KART,
                         100.0,
                         1L
-
                 ),
                 List.of(1L)
-
         );
     }
 
@@ -147,7 +144,6 @@ class OrderServiceImplTest {
         when(addressService.findById(1L)).thenReturn(address);
         when(userService.findByEmail("user@example.com")).thenReturn(user);
         when(productService.findById(1L)).thenReturn(product);
-        when(orderRepository.save(any(Order.class))).thenReturn(order);
 
         Order addedOrder = orderService.addOrder(orderRequestDto, "user@example.com");
 

@@ -3,15 +3,14 @@ package com.workintech.ecommerce.service;
 import com.workintech.ecommerce.entity.Address;
 import com.workintech.ecommerce.entity.User;
 import com.workintech.ecommerce.exceptions.ErrorException;
-import com.workintech.ecommerce.mapper.AddressMapper;
 import com.workintech.ecommerce.repository.AddressRepository;
-import com.workintech.ecommerce.repository.UserRepository;
 import com.workintech.ecommerce.dto.AddressRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AddressServiceImplTest {
 
     @Mock
@@ -37,8 +37,6 @@ class AddressServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-
         address = new Address();
         address.setId(1L);
         address.setDescription("Test Address");
@@ -114,7 +112,6 @@ class AddressServiceImplTest {
     @Test
     void addAddress() {
         when(userService.findByEmail("user@example.com")).thenReturn(user);
-        when(addressRepository.save(address)).thenReturn(address);
 
         Address addedAddress = addressService.addAddress(addressRequestDto, "user@example.com");
 
