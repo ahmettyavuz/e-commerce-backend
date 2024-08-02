@@ -16,15 +16,15 @@ import java.util.List;
 @RequestMapping("/welcome")
 public class WelcomeController {
 
-     private final ProductService productService;
+    private final ProductService productService;
 
 
-     @Autowired
-     public WelcomeController(ProductService productService) {
+    @Autowired
+    public WelcomeController(ProductService productService) {
         this.productService = productService;
     }
 
-
+    // Product çekme
     @GetMapping("/")
     public List<ProductResponseDto> getProducts(
             @RequestParam(defaultValue = "0") int offset,
@@ -33,15 +33,17 @@ public class WelcomeController {
         return products.stream().map(ProductMapper::productToProductResponseDto).toList();
     }
 
+    //Category ve Gender a göre product çekme
     @GetMapping("/category/gender")
     List<ProductResponseDto> getByCategoryAndGender(@RequestParam Enum_Category name,
-                                          @RequestParam Enum_Gender gender,
-                                          @RequestParam(defaultValue = "0")  int offset,
-                                          @RequestParam(defaultValue = "10")  int limit){
+                                                    @RequestParam Enum_Gender gender,
+                                                    @RequestParam(defaultValue = "0") int offset,
+                                                    @RequestParam(defaultValue = "10") int limit) {
 
-        List<Product> products = productService.getByCategoryAndGender(name,gender,offset,limit);
+        List<Product> products = productService.getByCategoryAndGender(name, gender, offset, limit);
         return products.stream().map(ProductMapper::productToProductResponseDto).toList();
     }
+}
 
     /*
     @GetMapping("/product")
@@ -65,14 +67,3 @@ public class WelcomeController {
     }
   */
 
-  /*
-
-    @GetMapping("/")
-    List<CategoryResponseDto> findAllCategory(){
-        return categoryService.findAll();
-    }
- */
-
-
-    //ürün search etme (ismine göre)
-}

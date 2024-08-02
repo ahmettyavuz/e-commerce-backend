@@ -4,6 +4,7 @@ import com.workintech.ecommerce.service.RegisterService;
 import com.workintech.ecommerce.dto.UserRegisterRequestDto;
 import com.workintech.ecommerce.dto.UserResponseDto;
 import com.workintech.ecommerce.mapper.UserMapper;
+import com.workintech.ecommerce.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,19 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final RegisterService registerService;
+    private final UserService userService;
 
     @Autowired
-    public AuthController(RegisterService registerService) {
+    public AuthController(RegisterService registerService, UserService userService) {
         this.registerService = registerService;
+        this.userService = userService;
     }
 
 
-    //kayıt olabilmeli
+    //kayıt olabilme
     @PostMapping("/register")
-    public UserResponseDto register(@Valid @RequestBody UserRegisterRequestDto userRegisterRequestDto){
-         return UserMapper.userToUserResponseDto(registerService.register(userRegisterRequestDto.firstName(),userRegisterRequestDto.lastName(),
-                                                 userRegisterRequestDto.email(),userRegisterRequestDto.password()));
+    public UserResponseDto register(@Valid @RequestBody UserRegisterRequestDto userRegisterRequestDto) {
+        return UserMapper.userToUserResponseDto(registerService.register(userRegisterRequestDto.firstName(), userRegisterRequestDto.lastName(),
+                userRegisterRequestDto.email(), userRegisterRequestDto.password()));
     }
 
+
+    //login endpointini kendim yazarsam otantikeyt isteyen endpointlere istek atrarken
+    // her seferinde benim yazıdğım /login endpointine gelip mi otantikeyti kontrol edecek ya da spring security kendi içerisinde mi yapıcak
 
 }

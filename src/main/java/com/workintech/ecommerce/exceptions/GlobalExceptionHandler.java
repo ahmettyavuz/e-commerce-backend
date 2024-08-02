@@ -18,7 +18,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ErrorException.class)
-    public ResponseEntity<ErrorResponse> handleException(ErrorException errorException){
+    public ResponseEntity<ErrorResponse> handleException(ErrorException errorException) {
         ErrorResponse errorResponse =
                 new ErrorResponse(errorException.getStatus().value(),
                         errorException.getMessage(),
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception exception){
+    public ResponseEntity<ErrorResponse> handleException(Exception exception) {
         ErrorResponse errorResponse =
                 new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
                         exception.getMessage(),

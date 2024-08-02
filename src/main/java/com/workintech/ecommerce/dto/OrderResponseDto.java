@@ -15,7 +15,7 @@ public record OrderResponseDto(
 
         AddressResponseDto addressResponseDto,
 
-        UserResponseDto userResponseDto,//Securitiden sonra güncellenecek
+        UserResponseDto userResponseDto,
 
         Double amount,
 

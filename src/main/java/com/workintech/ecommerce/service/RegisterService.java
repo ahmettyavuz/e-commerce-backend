@@ -37,8 +37,7 @@ public class RegisterService {
         user.setAccountLocked(false);
         user.setEnabled(true);
         user.setRole(role);
-       // role.addUser(user);
-        return  userRepository.save(user);
+        return userRepository.save(user);
     }
 
 }
